@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PesanFormal – Wireframe</title>
+  <style>
+    /* ============================================================
+       GLOBAL RESET & TOKENS
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #f5f5f5;
+      --surface:  #ffffff;
+      --border:   #d0d0d0;
+      --border2:  #e0e0e0;
+      --text:     #1a1a1a;
+      --muted:    #888;
+      --primary:  #1a1a1a;
+      --primary-hover: #333;
+      --accent:   #f0f0f0;
+      --selected: #1a1a1a;
+      --radius:   8px;
+      --shadow:   0 2px 8px rgba(0,0,0,.10);
+      --nav-h:    52px;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 14px;
+      min-height: 100vh;
+    }
+
+    /* ============================================================
+       SCREEN WRAPPER
+    ============================================================ */
+    .screen { display: none; flex-direction: column; min-height: 100vh; }
+    .screen.active { display: flex; }
+
+    /* ============================================================
+       NAV BAR
+    ============================================================ */
+    .navbar {
+      height: var(--nav-h);
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      flex-shrink: 0;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 8px;
+      font-weight: 700; font-size: 15px;
+    }
+    .logo-icon {
+      width: 36px; height: 36px;
+      background: var(--primary);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .logo-icon svg { fill: white; }
+    .nav-links { display: flex; gap: 6px; align-items: center; }
+    .nav-link {
+      padding: 6px 14px; border-radius: 6px; cursor: pointer;
+      font-size: 13px; color: var(--text); background: none; border: none;
+      transition: background .15s;
+    }
+    .nav-link:hover { background: var(--accent); }
+    .nav-link.active { background: var(--primary); color: #fff; }
+    .nav-avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--border); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ============================================================
+       PROGRESS STEPPER
+    ============================================================ */
+    .stepper {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0; padding: 20px 0 8px;
+    }
+    .step {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 4px;
+    }
+    .step-circle {
+      width: 28px; height: 28px; border-radius: 50%;
+      border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 600; color: var(--muted);
+      background: var(--surface);
+    }
+    .step.done .step-circle { background: var(--primary); border-color: var(--primary); color: #fff; }
+    .step.current .step-circle { border-color: var(--primary); color: var(--primary); font-weight: 700; }
+    .step-label { font-size: 11px; color: var(--muted); text-align: center; max-width: 80px; }
+    .step.done .step-label, .step.current .step-label { color: var(--text); }
+    .step-line { width: 60px; height: 2px; background: var(--border); margin-bottom: 18px; }
+    .step-line.done { background: var(--primary); }
+
+    /* ============================================================
+       MAIN CONTENT
+    ============================================================ */
+    .page-content { flex: 1; padding: 32px; max-width: 900px; width: 100%; margin: 0 auto; }
+    .page-content.wide { max-width: 1100px; }
+
+    /* ============================================================
+       HERO (Halaman Beranda)
+    ============================================================ */
+    .hero {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 64px 48px;
+      display: flex; align-items: center; gap: 48px;
+      margin-bottom: 32px;
+    }
+    .hero-text { flex: 1; }
+    .hero-title { font-size: 32px; font-weight: 800; line-height: 1.2; margin-bottom: 12px; }
+    .hero-sub { color: var(--muted); font-size: 14px; margin-bottom: 28px; line-height: 1.6; }
+    .hero-img {
+      width: 200px; height: 160px;
+      background: var(--accent); border: 2px dashed var(--border);
+      border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .hero-img span { color: var(--muted); font-size: 12px; }
+
+    /* ============================================================
+       BUTTONS
+    ============================================================ */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 24px; border-radius: var(--radius);
+      font-size: 14px; font-weight: 600; cursor: pointer;
+      border: none; transition: background .15s, color .15s;
+    }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-outline {
+      background: var(--surface); color: var(--text);
+      border: 1.5px solid var(--border);
+    }
+    .btn-outline:hover { background: var(--accent); }
+    .btn-sm { padding: 7px 14px; font-size: 13px; }
+    .btn-danger { background: #fee; color: #c00; border: 1.5px solid #fcc; }
+    .btn-danger:hover { background: #fdd; }
+
+    /* ============================================================
+       SECTION TITLE
+    ============================================================ */
+    .section-title { font-size: 18px; font-weight: 700; margin-bottom: 16px; }
+    .section-sub { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+
+    /* ============================================================
+       TEMPLATE CARDS (Beranda)
+    ============================================================ */
+    .template-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    }
+    .template-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px; text-align: center;
+    }
+    .template-card .t-icon {
+      width: 44px; height: 44px; background: var(--accent);
+      border: 1px solid var(--border); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 10px;
+    }
+    .template-card .t-name { font-weight: 600; margin-bottom: 8px; font-size: 14px; }
+    .template-card .t-lines { background: var(--accent); height: 6px; border-radius: 3px; margin-bottom: 6px; }
+    .template-card .t-lines.short { width: 70%; margin: 0 auto 6px; }
+
+    /* ============================================================
+       RECIPIENT CARDS (Step 1)
+    ============================================================ */
+    .recipient-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+      margin-bottom: 24px;
+    }
+    .recipient-card {
+      background: var(--surface); border: 2px solid var(--border);
+      border-radius: var(--radius); padding: 24px 16px; text-align: center;
+      cursor: pointer; transition: border-color .15s, background .15s;
+    }
+    .recipient-card:hover { border-color: var(--primary); }
+    .recipient-card.selected { border-color: var(--primary); background: #f8f8f8; }
+    .recipient-card .r-icon {
+      width: 52px; height: 52px; background: var(--accent);
+      border: 1px solid var(--border); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 10px; font-size: 22px;
+    }
+    .recipient-card .r-name { font-weight: 600; font-size: 14px; }
+    .recipient-card .r-sub { font-size: 11px; color: var(--muted); }
+
+    /* ============================================================
+       FORM CONTROLS
+    ============================================================ */
+    .form-group { margin-bottom: 18px; }
+    .form-label { font-size: 13px; font-weight: 600; margin-bottom: 6px; display: block; }
+    .form-input, .form-select, .form-textarea {
+      width: 100%; padding: 10px 12px;
+      border: 1.5px solid var(--border); border-radius: var(--radius);
+      font-size: 13px; background: var(--surface); color: var(--text);
+      outline: none; transition: border-color .15s;
+      font-family: inherit;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--primary);
+    }
+    .form-textarea { resize: vertical; min-height: 100px; }
+    .form-placeholder { color: var(--muted); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    /* ============================================================
+       RADIO GROUP
+    ============================================================ */
+    .radio-group { display: flex; gap: 12px; flex-wrap: wrap; }
+    .radio-card {
+      flex: 1; min-width: 140px;
+      border: 2px solid var(--border); border-radius: var(--radius);
+      padding: 12px 14px; cursor: pointer;
+      transition: border-color .15s;
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .radio-card.selected { border-color: var(--primary); background: #f8f8f8; }
+    .radio-dot {
+      width: 16px; height: 16px; border-radius: 50%;
+      border: 2px solid var(--border); flex-shrink: 0; margin-top: 2px;
+      background: var(--surface);
+    }
+    .radio-card.selected .radio-dot {
+      border-color: var(--primary); background: var(--primary);
+      box-shadow: inset 0 0 0 3px #fff;
+    }
+    .radio-info .radio-title { font-weight: 600; font-size: 13px; }
+    .radio-info .radio-sub { font-size: 11px; color: var(--muted); }
+
+    /* ============================================================
+       ACTION BAR
+    ============================================================ */
+    .action-bar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 24px; border-top: 1px solid var(--border2); margin-top: 24px;
+    }
+
+    /* ============================================================
+       MESSAGE RESULT
+    ============================================================ */
+    .result-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+      line-height: 1.8; font-size: 14px; margin-bottom: 24px;
+      position: relative;
+    }
+    .result-edit-btn {
+      position: absolute; top: 16px; right: 16px;
+    }
+    .result-text p { margin-bottom: 10px; }
+
+    /* ============================================================
+       EDIT TEXTAREA
+    ============================================================ */
+    .edit-area {
+      background: var(--surface); border: 1.5px solid var(--border);
+      border-radius: var(--radius); padding: 20px;
+      font-size: 14px; line-height: 1.8; width: 100%; min-height: 260px;
+      font-family: inherit; resize: vertical; outline: none;
+    }
+    .edit-area:focus { border-color: var(--primary); }
+
+    /* ============================================================
+       TABLE (Riwayat)
+    ============================================================ */
+    .data-table { width: 100%; border-collapse: collapse; }
+    .data-table th {
+      text-align: left; padding: 10px 12px; font-size: 12px;
+      color: var(--muted); border-bottom: 2px solid var(--border);
+      font-weight: 600; text-transform: uppercase; letter-spacing: .04em;
+    }
+    .data-table td {
+      padding: 12px 12px; font-size: 13px;
+      border-bottom: 1px solid var(--border2);
+    }
+    .data-table tr:hover td { background: #fafafa; }
+    .action-icons { display: flex; gap: 6px; }
+    .icon-btn {
+      width: 30px; height: 30px; border-radius: 6px;
+      border: 1px solid var(--border); background: var(--surface);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 14px; transition: background .15s;
+    }
+    .icon-btn:hover { background: var(--accent); }
+    .search-bar {
+      display: flex; align-items: center; gap: 8px;
+      border: 1.5px solid var(--border); border-radius: var(--radius);
+      padding: 8px 12px; background: var(--surface); max-width: 280px;
+    }
+    .search-bar input {
+      border: none; outline: none; font-size: 13px; width: 100%;
+      background: transparent; font-family: inherit;
+    }
+    .table-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 16px;
+    }
+
+    /* ============================================================
+       GUIDE (Panduan)
+    ============================================================ */
+    .guide-layout { display: grid; grid-template-columns: 220px 1fr; gap: 24px; }
+    .guide-sidebar {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 12px; height: fit-content;
+    }
+    .guide-nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 12px; border-radius: 6px; cursor: pointer;
+      font-size: 13px; transition: background .15s;
+    }
+    .guide-nav-item:hover { background: var(--accent); }
+    .guide-nav-item.active { background: var(--primary); color: #fff; }
+    .guide-body {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px;
+    }
+    .guide-body h2 { font-size: 20px; margin-bottom: 8px; }
+    .guide-body .guide-sub { color: var(--muted); font-size: 13px; margin-bottom: 20px; }
+    .guide-list { list-style: none; }
+    .guide-list li {
+      display: flex; gap: 12px; padding: 10px 0;
+      border-bottom: 1px solid var(--border2); font-size: 13px;
+    }
+    .guide-list li:last-child { border-bottom: none; }
+    .guide-num {
+      width: 24px; height: 24px; border-radius: 50%;
+      background: var(--primary); color: #fff;
+      font-size: 12px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .guide-illus {
+      margin-top: 20px; height: 120px; background: var(--accent);
+      border: 1.5px dashed var(--border); border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); font-size: 12px;
+    }
+
+    /* ============================================================
+       DETAIL TEMPLATE (Screen 8)
+    ============================================================ */
+    .detail-layout { display: grid; grid-template-columns: 220px 1fr; gap: 24px; }
+    .detail-sidebar {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 12px; height: fit-content;
+    }
+    .detail-nav-item {
+      padding: 10px 12px; border-radius: 6px; cursor: pointer;
+      font-size: 13px; transition: background .15s; margin-bottom: 4px;
+    }
+    .detail-nav-item:hover { background: var(--accent); }
+    .detail-nav-item.active { background: var(--accent); font-weight: 600; }
+    .detail-body {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+    }
+    .detail-title { font-size: 16px; font-weight: 700; margin-bottom: 16px; }
+    .template-preview {
+      background: var(--accent); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 16px; font-size: 13px; line-height: 1.8;
+    }
+
+    /* ============================================================
+       SELECT DROPDOWN
+    ============================================================ */
+    .form-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M6 8L1 3h10z' fill='%23888'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; cursor: pointer; }
+
+    /* ============================================================
+       BADGE
+    ============================================================ */
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+    .badge-gray { background: var(--accent); color: var(--muted); border: 1px solid var(--border); }
+
+    /* ============================================================
+       DIVIDER
+    ============================================================ */
+    hr.divider { border: none; border-top: 1px solid var(--border2); margin: 24px 0; }
+
+    /* ============================================================
+       TOAST (feedback)
+    ============================================================ */
+    .toast {
+      position: fixed; bottom: 24px; right: 24px;
+      background: var(--primary); color: #fff; padding: 12px 20px;
+      border-radius: var(--radius); font-size: 13px;
+      opacity: 0; pointer-events: none; transition: opacity .3s;
+      z-index: 999;
+    }
+    .toast.show { opacity: 1; }
+
+    /* ============================================================
+       PAGE HEADER ROW
+    ============================================================ */
+    .page-header {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      margin-bottom: 24px;
+    }
+    .page-header h1 { font-size: 22px; font-weight: 800; }
+    .page-header p { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 700px) {
+      .hero { flex-direction: column; }
+      .recipient-grid { grid-template-columns: 1fr 1fr; }
+      .template-grid { grid-template-columns: 1fr 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .guide-layout, .detail-layout { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ================================================================
+     SCREEN 1: HALAMAN BERANDA
+================================================================ -->
+<div class="screen active" id="screen-1">
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="logo">
+      <div class="logo-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+      </div>
+      <span>Logo<br><small style="font-weight:400;font-size:11px">PesanFormal</small></span>
+    </div>
+    <div class="nav-links">
+      <button class="nav-link active">Beranda</button>
+      <button class="nav-link" onclick="goTo(2)">Buat Pesan</button>
+      <button class="nav-link" onclick="goTo(6)">Riwayat</button>
+      <button class="nav-link" onclick="goTo(7)">Panduan</button>
+    </div>
+    <div class="nav-avatar">👤</div>
+  </nav>
+
+  <!-- CONTENT -->
+  <div class="page-content">
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-text">
+        <div class="hero-title">Generator Template<br>Pesan Formal</div>
+        <div class="hero-sub">Buat pesan yang sopan, jelas, dan sesuai etika<br>untuk dosen, staf, dan senior.</div>
+        <button class="btn btn-primary" onclick="goTo(2)">Buat Pesan →</button>
+      </div>
+      <div class="hero-img">
+        <span>[ Ilustrasi Surat ]</span>
+      </div>
+    </div>
+
+    <!-- Template Examples -->
+    <div class="section-title">Contoh Template Pesan</div>
+    <div class="template-grid">
+      <div class="template-card">
+        <div class="t-icon">🎓</div>
+        <div class="t-name">Dosen</div>
+        <div class="t-lines"></div>
+        <div class="t-lines short"></div>
+        <br>
+        <button class="btn btn-outline btn-sm" onclick="goTo(8)">Lihat Contoh</button>
+      </div>
+      <div class="template-card">
+        <div class="t-icon">🏢</div>
+        <div class="t-name">Staf</div>
+        <div class="t-lines"></div>
+        <div class="t-lines short"></div>
+        <br>
+        <button class="btn btn-outline btn-sm" onclick="goTo(8)">Lihat Contoh</button>
+      </div>
+      <div class="template-card">
+        <div class="t-icon">👥</div>
+        <div class="t-name">Senior</div>
+        <div class="t-lines"></div>
+        <div class="t-lines short"></div>
+        <br>
+        <button class="btn btn-outline btn-sm" onclick="goTo(8)">Lihat Contoh</button>
+      </div>
+    </div>
+  </div>
+</div><!-- /screen-1 -->
+
+
+<!-- ================================================================
+     SCREEN 2: PILIH PENERIMA PESAN
+================================================================ -->
+<div class="screen" id="screen-2">
+  <nav class="navbar">
+    <div class="logo">
+      <div class="logo-icon"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="white" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div>
+      <span>Logo<br><small style="font-weight:400;font-size:11px">PesanFormal</small></span>
+    </div>
+    <div class="nav-links">
+      <button class="nav-link" onclick="goTo(1)">Beranda</button>
+      <button class="nav-link active">Buat Pesan</button>
+      <button class="nav-link" onclick="goTo(6)">Riwayat</button>
+      <button class="nav-link" onclick="goTo(7)">Panduan</button>
+    </div>
+    <div class="nav-avatar">👤</div>
+  </nav>
+
+  <div class="page-content">
+    <!-- Stepper -->
+    <div class="stepper">
+      <div class="step current">
+        <div class="step-circle">1</div>
+        <div class="step-label">Pilih Penerima dan Kategori</div>
+      </div>
+      <div class="step-line"></div>
+      <div class="step">
+        <div class="step-circle">2</div>
+        <div class="step-label">Isi Informasi Pesan</div>
+      </div>
+      <div class="step-line"></div>
+      <div class="step">
+        <div class="step-circle">3</div>
+        <div class="step-label">Hasil Pesan</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="section-title">Pilih Penerima Pesan</div>
+    <div class="recipient-grid">
+      <div class="recipient-card selected" onclick="selectRecipient(this)">
+        <div class="r-icon">🎓</div>
+        <div class="r-name">Dosen</div>
+      </div>
+      <div class="recipient-card" onclick="selectRecipient(this)">
+        <div class="r-icon">🏢</div>
+        <div class="r-name">Staf</div>
+        <div class="r-sub">Tenaga Kependidikan</div>
+      </div>
+      <div class="recipient-card" onclick="selectRecipient(this)">
+        <div class="r-icon">👥</div>
+        <div class="r-name">Senior</div>
+      </div>
+      <div class="recipient-card" onclick="selectRecipient(this)">
+        <div class="r-icon">🏛️</div>
+        <div class="r-name">Pengurus Organisasi</div>
+      </div>
+    </div>
+
+    <div class="section-title">Pilih Kategori Pesan</div>
+    <div class="form-group">
+      <select class="form-select">
+        <option>Pilih kategori pesan...</option>
+        <option>Izin Tidak Masuk Kuliah</option>
+        <option>Permohonan Bimbingan</option>
+        <option>Konfirmasi Jadwal</option>
+        <option>Permintaan Informasi</option>
+        <option>Surat Domisili</option>
+      </select>
+    </div>
+
+    <div class="action-bar">
+      <div></div>
+      <button class="btn btn-primary" onclick="goTo(3)">Selanjutnya →</button>
+    </div>
+  </div>
+</div><!-- /screen-2 -->
+
+
+<!-- ================================================================
+     SCREEN 3: FORMULIR INFORMASI PESAN
+================================================================ -->
+<div class="screen" id="screen-3">
+  <nav class="navbar">
+    <div class="logo">
+      <div class="logo-icon"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="white" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div>
+      <span>Logo<br><small style="font-weight:400;font-size:11px">PesanFormal</small></span>
+    </div>
+    <div class="nav-links">
+      <button class="nav-link" onclick="goTo(1)">Beranda</button>
+      <button class="nav-link active">Buat Pesan</button>
+      <button class="nav-link" onclick="goTo(6)">Riwayat</button>
+      <button class="nav-link" onclick="goTo(7)">Panduan</button>
+    </div>
+    <div class="nav-avatar">👤</div>
+  </nav>
+
+  <div class="page-content">
+    <!-- Stepper -->
+    <div class="stepper">
+      <div class="step done">
+        <div class="step-circle">✓</div>
+        <div class="step-label">Pilih Penerima dan Kategori</div>
+      </div>
+      <div class="step-line done"></div>
+      <div class="step current">
+        <div class="step-circle">2</div>
+        <div class="step-label">Isi Informasi Pesan</div>
+      </div>
+      <div class="step-line"></div>
+      <div class="step">
+        <div class="step-circle">3</div>
+        <div class="step-label">Hasil Pesan</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="section-title">Lengkapi Informasi Pesan</div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Nama Lengkap Mahasiswa</label>
+        <input class="form-input" type="text" placeholder="Masukkan nama lengkap" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Nama Penerima</label>
+        <input class="form-input" type="text" placeholder="Masukkan nama dosen/staf/senior" />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">NIM</label>
+        <input class="form-input" type="text" placeholder="Masukkan NIM" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Alasan / Keperluan Pesan</label>
+        <textarea class="form-textarea" placeholder="Jelaskan keperluan Anda..." style="min-height:72px"></textarea>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Program Studi / Kelas</label>
+        <input class="form-input" type="text" placeholder="Masukkan program studi / kelas" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tanggal Terkait <span style="color:var(--muted);font-weight:400">(opsional)</span></label>
+        <input class="form-input" type="text" placeholder="dd/mm/yyyy" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Gaya Bahasa</label>
+      <div class="radio-group">
+        <div class="radio-card selected" onclick="selectRadio(this, 'lang')">
+          <div class="radio-dot"></div>
+          <div class="radio-info">
+            <div class="radio-title">Formal</div>
+            <div class="radio-sub">Bahasa resmi dan akademis</div>
+          </div>
+        </div>
+        <div class="radio-card" onclick="selectRadio(this, 'lang')">
+          <div class="radio-dot"></div>
+          <div class="radio-info">
+            <div class="radio-title">Semiformal</div>
+            <div class="radio-sub">Bahasa sopan dan ringan</div>
+          </div>
+        </div>
+        <div class="radio-card" onclick="selectRadio(this, 'lang')">
+          <div class="radio-dot"></div>
+          <div class="radio-info">
+            <div class="radio-title">Singkat</div>
+            <div class="radio-sub">Pesan ringkas dan jelas</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="action-bar">
+      <button class="btn btn-outline" onclick="goTo(2)">← Kembali</button>
+      <button class="btn btn-primary" onclick="goTo(4)">Buat Pesan →</button>
+    </div>
+  </div>
+</div><!-- /screen-3 -->
+
+
+<!-- ================================================================
+     SCREEN 4: HASIL GENERATOR PESAN
+================================================================ -->
+<div class="screen" id="screen-4">
+  <nav class="navbar">
+    <div class="logo">
+      <div class="logo-icon"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="white" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div>
+      <span>Logo<br><small style="font-weight:400;font-size:11px">PesanFormal</small></span>
+    </div>
+    <div class="nav-links">
+      <button class="nav-link" onclick="goTo(1)">Beranda</button>
+      <button class="nav-link active">Buat Pesan</button>
+      <button class="nav-link" onclick="goTo(6)">Riwayat</button>
+      <button class="nav-link" onclick="goTo(7)">Panduan</button>
+    </div>
+    <div class="nav-avatar">👤</div>
+  </nav>
+
+  <div class="page-content">
+    <!-- Stepper -->
+    <div class="stepper">
+      <div class="step done">
+        <div class="step-circle">✓</div>
+        <div class="step-label">Pilih Penerima dan Kategori</div>
+      </div>
+      <div class="step-line done"></div>
+      <div class="step done">
+        <div class="step-circle">✓</div>
+        <div class="step-label">Isi Informasi Pesan</div>
+      </div>
+      <div class="step-line done"></div>
+      <div class="step current">
+        <div class="step-circle">3</div>
+        <div class="step-label">Hasil Pesan</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="section-title">Hasil Pesan</div>
+
+    <div class="result-box">
+      <button class="btn btn-outline btn-sm result-edit-btn" onclick="goTo(5)">✏️ Edit Pesan</button>
+      <div class="result-text">
+        <p>Assalamualaikum Wr. Wb.</p>
+        <p>Perkenalkan, saya Aulia Ramadhani, mahasiswa Teknik Komputer Universitas Negeri Makassar dengan NIM 250210500009.</p>
+        <p>Saya ingin menyampaikan bahwa ………………………………………</p>
+        <p>Demikian yang dapat saya sampaikan. Terima kasih atas waktu dan perhatiannya.</p>
+        <p>Wassalamualaikum Wr. Wb.</p>
+      </div>
+    </div>
+
+    <div class="action-bar">
+      <button class="btn btn-outline" onclick="goTo(3)">← Kembali</button>
+      <div style="display:flex;gap:10px">
+        <button class="btn btn-outline" onclick="showToast('✅ Disimpan ke riwayat!')">💾 Simpan ke Riwayat</button>
+        <button class="btn btn-primary" onclick="showToast('📋 Pesan disalin!')">📋 Salin Pesan</button>
+      </div>
+    </div>
+  </div>
+</div><!-- /screen-4 -->
+
+
+<!-- ================================================================
+     SCREEN 5: EDIT PESAN
+================================================================ -->
+<div class="screen" id="screen-5">
+  <nav class="navbar">
+    <div class="logo">
+      <div class="logo-icon"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="white" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div>
+      <span>Logo<br><small style="font-weight:400;font-size:11px">PesanFormal</small></span>
+    </div>
+    <div class="nav-links">
+      <button class="nav-link" onclick="goTo(1)">Beranda</button>
+      <button class="nav-link active">Buat Pesan</button>
+      <button class="nav-link" onclick="goTo(6)">Riwayat</button>
+      <button class="nav-link" onclick="goTo(7)">Panduan</button>
+    </div>
+    <div class="nav-avatar">👤</div>
+  </nav>
+
+  <div class="page-content">
+    <div class="section-title">Edit Pesan</div>
+
+    <textarea class="edit-area">Assalamualaikum Wr. Wb.
+
+Perkenalkan, saya Aulia Ramadhani, mahasiswa Teknik Komputer Universitas Negeri Makassar dengan NIM 250210500009.
+
+Saya ingin menyampaikan bahwa ………………………………………………………………………………………………………………
+
+Demikian yang dapat saya sampaikan. Terima kasih atas waktu dan perhatiannya.
+
+Wassalamualaikum Wr. Wb.</textarea>
+
+    <div class="action-bar">
+      <button class="btn btn-outline" onclick="goTo(4)">🔄 Reset</button>
+      <button class="btn btn-primary" onclick="goTo(4); showToast('✅ Perubahan disimpan!')">Simpan Perubahan</button>
+    </div>
+  </div>
+</div><!-- /screen-5 -->
+
+
+<!-- ================================================================
+     SCREEN 6: RIWAYAT PESAN
+================================================================ -->
+<div class="screen" id="screen-6">
+  <nav class="navbar">
+    <div class="logo">
+      <div class="logo-icon"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="white" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div>
+      <span>Logo<br><small style="font-weight:400;font-size:11px">PesanFormal</small></span>
+    </div>
+    <div class="nav-links">
+      <button class="nav-link" onclick="goTo(1)">Beranda</button>
+      <button class="nav-link" onclick="goTo(2)">Buat Pesan</button>
+      <button class="nav-link active">Riwayat</button>
+      <button class="nav-link" onclick="goTo(7)">Panduan</button>
+    </div>
+    <div class="nav-avatar">👤</div>
+  </nav>
+
+  <div class="page-content wide">
+    <div class="table-header">
+      <div class="section-title" style="margin-bottom:0">Riwayat Pesan</div>
+      <div class="search-bar">
+        <span>🔍</span>
+        <input type="text" placeholder="Cari pesan..." />
+      </div>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Judul Pesan</th>
+            <th>Penerima</th>
+            <th>Tanggal</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Izin Tidak Masuk Kuliah</td>
+            <td><span class="badge badge-gray">Dosen</span></td>
+            <td>27 Okt 2026</td>
+            <td>
+              <div class="action-icons">
+                <div class="icon-btn" title="Lihat" onclick="goTo(4)">👁️</div>
+                <div class="icon-btn" title="Salin" onclick="showToast('📋 Pesan disalin!')">📋</div>
+                <div class="icon-btn" title="Hapus" onclick="showToast('🗑️ Dihapus!')">🗑️</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Permohonan Bimbingan</td>
+            <td><span class="badge badge-gray">Dosen</span></td>
+            <td>25 Okt 2026</td>
+            <td>
+              <div class="action-icons">
+                <div class="icon-btn" onclick="goTo(4)">👁️</div>
+                <div class="icon-btn" onclick="showToast('📋 Pesan disalin!')">📋</div>
+                <div class="icon-btn" onclick="showToast('🗑️ Dihapus!')">🗑️</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Konfirmasi Jadwal</td>
+            <td><span class="badge badge-gray">Staf</span></td>
+            <td>23 Okt 2026</td>
+            <td>
+              <div class="action-icons">
+                <div class="icon-btn" onclick="goTo(4)">👁️</div>
+                <div class="icon-btn" onclick="showToast('📋 Pesan disalin!')">📋</div>
+                <div class="icon-btn" onclick="showToast('🗑️ Dihapus!')">🗑️</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Permintaan Informasi</td>
+            <td><span class="badge badge-gray">Senior</span></td>
+            <td>18 Okt 2026</td>
+            <td>
+              <div class="action-icons">
+                <div class="icon-btn" onclick="goTo(4)">👁️</div>
+                <div class="icon-btn" onclick="showToast('📋 Pesan disalin!')">📋</div>
+                <div class="icon-btn" onclick="showToast('🗑️ Dihapus!')">🗑️</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Surat Domisili</td>
+            <td><span class="badge badge-gray">Staf</span></td>
+            <td>15 Okt 2026</td>
+            <td>
+              <div class="action-icons">
+                <div class="icon-btn" onclick="goTo(4)">👁️</div>
+                <div class="icon-btn" onclick="showToast('📋 Pesan disalin!')">📋</div>
+                <div class="icon-btn" onclick="showToast('🗑️ Dihapus!')">🗑️</div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="display:flex;justify-content:flex-end;margin-top:16px">
+      <button class="btn btn-danger btn-sm" onclick="showToast('🗑️ Semua riwayat dihapus!')">🗑️ Hapus Semua Riwayat</button>
+    </div>
+  </div>
+</div><!-- /screen-6 -->
+
+
+<!-- ================================================================
+     SCREEN 7: PANDUAN ETIKA KOMUNIKASI
+================================================================ -->
+<div class="screen" id="screen-7">
+  <nav class="navbar">
+    <div class="logo">
+      <div class="logo-icon"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="white" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div>
+      <span>Logo<br><small style="font-weight:400;font-size:11px">PesanFormal</small></span>
+    </div>
+    <div class="nav-links">
+      <button class="nav-link" onclick="goTo(1)">Beranda</button>
+      <button class="nav-link" onclick="goTo(2)">Buat Pesan</button>
+      <button class="nav-link" onclick="goTo(6)">Riwayat</button>
+      <button class="nav-link active">Panduan</button>
+    </div>
+    <div class="nav-avatar">👤</div>
+  </nav>
+
+  <div class="page-content wide">
+    <div class="guide-layout">
+      <!-- Sidebar -->
+      <div class="guide-sidebar">
+        <div class="guide-nav-item active">📋 Etika Umum</div>
+        <div class="guide-nav-item" onclick="showToast('Menghubungi Dosen')">🎓 Menghubungi Dosen</div>
+        <div class="guide-nav-item" onclick="showToast('Menghubungi Staf')">🏢 Menghubungi Staf</div>
+        <div class="guide-nav-item" onclick="showToast('Menghubungi Senior')">👥 Menghubungi Senior</div>
+        <div class="guide-nav-item" onclick="showToast('Tips Tambahan')">💡 Tips Tambahan</div>
+      </div>
+
+      <!-- Body -->
+      <div class="guide-body">
+        <h2>Panduan Etika Komunikasi Akademik</h2>
+        <div class="guide-sub">Beberapa hal yang perlu diperhatikan dalam menghubungi dosen, staf, dan senior.</div>
+
+        <div style="font-weight:700;font-size:14px;margin-bottom:10px">Etika Umum</div>
+        <ul class="guide-list">
+          <li>
+            <div class="guide-num">1</div>
+            <div>Gunakan salam dan sapaan yang sopan sesuai penerima pesan.</div>
+          </li>
+          <li>
+            <div class="guide-num">2</div>
+            <div>Perkenalkan identitas diri (nama, NIM, dan program studi).</div>
+          </li>
+          <li>
+            <div class="guide-num">3</div>
+            <div>Sampaikan tujuan atau keperluan dengan jelas dan ringkas.</div>
+          </li>
+          <li>
+            <div class="guide-num">4</div>
+            <div>Perhatikan waktu mengirim pesan (hindari jam istirahat atau hari libur).</div>
+          </li>
+          <li>
+            <div class="guide-num">5</div>
+            <div>Periksa kembali pesan sebelum dikirim.</div>
+          </li>
+        </ul>
+
+        <div class="guide-illus">[ Ilustrasi Panduan ]</div>
+      </div>
+    </div>
+  </div>
+</div><!-- /screen-7 -->
+
+
+<!-- ================================================================
+     SCREEN 8: DETAIL CONTOH TEMPLATE
+================================================================ -->
+<div class="screen" id="screen-8">
+  <nav class="navbar">
+    <div class="logo">
+      <div class="logo-icon"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="white" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div>
+      <span>Logo<br><small style="font-weight:400;font-size:11px">PesanFormal</small></span>
+    </div>
+    <div class="nav-links">
+      <button class="nav-link" onclick="goTo(1)">Beranda</button>
+      <button class="nav-link" onclick="goTo(2)">Buat Pesan</button>
+      <button class="nav-link" onclick="goTo(6)">Riwayat</button>
+      <button class="nav-link" onclick="goTo(7)">Panduan</button>
+    </div>
+    <div class="nav-avatar">👤</div>
+  </nav>
+
+  <div class="page-content wide">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+      <div class="section-title" style="margin:0">Contoh Template Pesan – Dosen</div>
+      <button class="btn btn-outline btn-sm" onclick="goTo(1)">← Kembali</button>
+    </div>
+
+    <div class="detail-layout">
+      <!-- Sidebar -->
+      <div class="detail-sidebar">
+        <div class="detail-nav-item active">Perizinan</div>
+        <div class="detail-nav-item" onclick="switchTemplate('bimbingan')">Permohonan Akademik</div>
+        <div class="detail-nav-item" onclick="switchTemplate('konfirmasi')">Konfirmasi Informasi</div>
+        <div class="detail-nav-item" onclick="switchTemplate('lainnya')">Lainnya</div>
+      </div>
+
+      <!-- Body -->
+      <div class="detail-body">
+        <div class="detail-title" id="template-title">Izin Tidak Masuk Kuliah</div>
+        <div class="template-preview" id="template-preview">
+          Assalamualaikum Wr. Wb.<br><br>
+          Perkenalkan, saya <strong>[Nama]</strong>, mahasiswa <strong>[Program Studi]</strong> dengan NIM <strong>[NIM]</strong>.<br><br>
+          Saya ingin menyampaikan bahwa saya tidak dapat mengikuti perkuliahan pada <strong>[tanggal]</strong> karena <strong>[alasan]</strong>. Saya mohon maaf atas ketidakhadiran saya.<br><br>
+          Terima kasih atas waktu dan perhatian Bapak/Ibu.<br><br>
+          Wassalamualaikum Wr. Wb.
+        </div>
+
+        <div style="display:flex;justify-content:flex-end;margin-top:16px">
+          <button class="btn btn-primary btn-sm" onclick="showToast('📋 Template disalin!'); goTo(2)">📋 Salin Template</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /screen-8 -->
+
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+
+<script>
+  /* ─── Navigation ─── */
+  function goTo(n) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-' + n).classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  /* ─── Select recipient card ─── */
+  function selectRecipient(el) {
+    document.querySelectorAll('.recipient-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  /* ─── Select radio card ─── */
+  function selectRadio(el, group) {
+    document.querySelectorAll('.radio-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  /* ─── Toast notification ─── */
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  /* ─── Switch template in Screen 8 ─── */
+  const templates = {
+    bimbingan: {
+      title: 'Permohonan Bimbingan',
+      body: 'Assalamualaikum Wr. Wb.<br><br>Perkenalkan, saya <strong>[Nama]</strong>, mahasiswa <strong>[Program Studi]</strong> dengan NIM <strong>[NIM]</strong>.<br><br>Saya ingin memohon kesediaan Bapak/Ibu untuk dapat memberikan bimbingan terkait <strong>[topik]</strong> pada <strong>[tanggal/waktu]</strong>.<br><br>Terima kasih atas perhatian Bapak/Ibu.<br><br>Wassalamualaikum Wr. Wb.'
+    },
+    konfirmasi: {
+      title: 'Konfirmasi Informasi',
+      body: 'Assalamualaikum Wr. Wb.<br><br>Perkenalkan, saya <strong>[Nama]</strong>, mahasiswa <strong>[Program Studi]</strong> dengan NIM <strong>[NIM]</strong>.<br><br>Saya ingin mengkonfirmasi informasi mengenai <strong>[topik]</strong>. Apakah Bapak/Ibu dapat membantu mengklarifikasi hal tersebut?<br><br>Terima kasih atas waktu dan perhatian Bapak/Ibu.<br><br>Wassalamualaikum Wr. Wb.'
+    },
+    lainnya: {
+      title: 'Pesan Lainnya',
+      body: 'Assalamualaikum Wr. Wb.<br><br>Perkenalkan, saya <strong>[Nama]</strong>, mahasiswa <strong>[Program Studi]</strong> dengan NIM <strong>[NIM]</strong>.<br><br>Saya ingin menyampaikan <strong>[keperluan/tujuan]</strong>.<br><br>Demikian yang dapat saya sampaikan. Terima kasih atas waktu dan perhatian Bapak/Ibu.<br><br>Wassalamualaikum Wr. Wb.'
+    }
+  };
+
+  function switchTemplate(key) {
+    const t = templates[key];
+    document.getElementById('template-title').textContent = t.title;
+    document.getElementById('template-preview').innerHTML = t.body;
+    document.querySelectorAll('.detail-nav-item').forEach(i => i.classList.remove('active'));
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>
