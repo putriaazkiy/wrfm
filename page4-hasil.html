@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PesanFormal – Hasil Generator Pesan</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <a class="logo" href="page1-beranda.html">
+      <div class="logo-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24"><path fill="white" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+      </div>
+      <span>Logo<br><small style="font-weight:400;font-size:11px">PesanFormal</small></span>
+    </a>
+    <div class="nav-links">
+      <a class="nav-link" href="page1-beranda.html">Beranda</a>
+      <a class="nav-link active" href="page2-pilih-penerima.html">Buat Pesan</a>
+      <a class="nav-link" href="page6-riwayat.html">Riwayat</a>
+      <a class="nav-link" href="page7-panduan.html">Panduan</a>
+    </div>
+    <div class="nav-avatar">👤</div>
+  </nav>
+
+  <!-- CONTENT -->
+  <div class="page-content">
+
+    <!-- Stepper -->
+    <div class="stepper">
+      <div class="step done">
+        <div class="step-circle">✓</div>
+        <div class="step-label">Pilih Penerima dan Kategori</div>
+      </div>
+      <div class="step-line done"></div>
+      <div class="step done">
+        <div class="step-circle">✓</div>
+        <div class="step-label">Isi Informasi Pesan</div>
+      </div>
+      <div class="step-line done"></div>
+      <div class="step current">
+        <div class="step-circle">3</div>
+        <div class="step-label">Hasil Pesan</div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="section-title">Hasil Pesan</div>
+
+    <!-- Result Box -->
+    <div class="result-box">
+      <a class="btn btn-outline btn-sm result-edit-btn" href="page5-edit.html">✏️ Edit Pesan</a>
+      <div class="result-text">
+        <p>Assalamualaikum Wr. Wb.</p>
+        <p>
+          Perkenalkan, saya Aulia Ramadhani, mahasiswa Teknik Komputer
+          Universitas Negeri Makassar dengan NIM 250210500009.
+        </p>
+        <p>Saya ingin menyampaikan bahwa ………………………………………</p>
+        <p>
+          Demikian yang dapat saya sampaikan. Terima kasih atas waktu
+          dan perhatiannya.
+        </p>
+        <p>Wassalamualaikum Wr. Wb.</p>
+      </div>
+    </div>
+
+    <!-- Action Bar -->
+    <div class="action-bar">
+      <a class="btn btn-outline" href="page3-formulir.html">← Kembali</a>
+      <div style="display:flex;gap:10px">
+        <button class="btn btn-outline" onclick="showToast('✅ Disimpan ke riwayat!')">
+          💾 Simpan ke Riwayat
+        </button>
+        <button class="btn btn-primary" onclick="showToast('📋 Pesan disalin!')">
+          📋 Salin Pesan
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="utils.js"></script>
+</body>
+</html>

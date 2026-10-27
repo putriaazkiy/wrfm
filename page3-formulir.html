@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PesanFormal – Formulir Informasi Pesan</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <a class="logo" href="page1-beranda.html">
+      <div class="logo-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24"><path fill="white" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+      </div>
+      <span>Logo<br><small style="font-weight:400;font-size:11px">PesanFormal</small></span>
+    </a>
+    <div class="nav-links">
+      <a class="nav-link" href="page1-beranda.html">Beranda</a>
+      <a class="nav-link active" href="page2-pilih-penerima.html">Buat Pesan</a>
+      <a class="nav-link" href="page6-riwayat.html">Riwayat</a>
+      <a class="nav-link" href="page7-panduan.html">Panduan</a>
+    </div>
+    <div class="nav-avatar">👤</div>
+  </nav>
+
+  <!-- CONTENT -->
+  <div class="page-content">
+
+    <!-- Stepper -->
+    <div class="stepper">
+      <div class="step done">
+        <div class="step-circle">✓</div>
+        <div class="step-label">Pilih Penerima dan Kategori</div>
+      </div>
+      <div class="step-line done"></div>
+      <div class="step current">
+        <div class="step-circle">2</div>
+        <div class="step-label">Isi Informasi Pesan</div>
+      </div>
+      <div class="step-line"></div>
+      <div class="step">
+        <div class="step-circle">3</div>
+        <div class="step-label">Hasil Pesan</div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="section-title">Lengkapi Informasi Pesan</div>
+
+    <!-- Row 1 -->
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Nama Lengkap Mahasiswa</label>
+        <input class="form-input" type="text" placeholder="Masukkan nama lengkap" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Nama Penerima</label>
+        <input class="form-input" type="text" placeholder="Masukkan nama dosen/staf/senior" />
+      </div>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">NIM</label>
+        <input class="form-input" type="text" placeholder="Masukkan NIM" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Alasan / Keperluan Pesan</label>
+        <textarea class="form-textarea" placeholder="Jelaskan keperluan Anda..." style="min-height:72px"></textarea>
+      </div>
+    </div>
+
+    <!-- Row 3 -->
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Program Studi / Kelas</label>
+        <input class="form-input" type="text" placeholder="Masukkan program studi / kelas" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">
+          Tanggal Terkait
+          <span style="color:var(--muted);font-weight:400">(opsional)</span>
+        </label>
+        <input class="form-input" type="text" placeholder="dd/mm/yyyy" />
+      </div>
+    </div>
+
+    <!-- Gaya Bahasa -->
+    <div class="form-group">
+      <label class="form-label">Gaya Bahasa</label>
+      <div class="radio-group">
+        <div class="radio-card selected" onclick="selectRadio(this)">
+          <div class="radio-dot"></div>
+          <div class="radio-info">
+            <div class="radio-title">Formal</div>
+            <div class="radio-sub">Bahasa resmi dan akademis</div>
+          </div>
+        </div>
+        <div class="radio-card" onclick="selectRadio(this)">
+          <div class="radio-dot"></div>
+          <div class="radio-info">
+            <div class="radio-title">Semiformal</div>
+            <div class="radio-sub">Bahasa sopan dan ringan</div>
+          </div>
+        </div>
+        <div class="radio-card" onclick="selectRadio(this)">
+          <div class="radio-dot"></div>
+          <div class="radio-info">
+            <div class="radio-title">Singkat</div>
+            <div class="radio-sub">Pesan ringkas dan jelas</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Bar -->
+    <div class="action-bar">
+      <a class="btn btn-outline" href="page2-pilih-penerima.html">← Kembali</a>
+      <a class="btn btn-primary" href="page4-hasil.html">Buat Pesan →</a>
+    </div>
+
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="utils.js"></script>
+</body>
+</html>

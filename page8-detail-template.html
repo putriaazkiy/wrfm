@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PesanFormal – Detail Contoh Template</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <a class="logo" href="page1-beranda.html">
+      <div class="logo-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24"><path fill="white" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+      </div>
+      <span>Logo<br><small style="font-weight:400;font-size:11px">PesanFormal</small></span>
+    </a>
+    <div class="nav-links">
+      <a class="nav-link" href="page1-beranda.html">Beranda</a>
+      <a class="nav-link" href="page2-pilih-penerima.html">Buat Pesan</a>
+      <a class="nav-link" href="page6-riwayat.html">Riwayat</a>
+      <a class="nav-link" href="page7-panduan.html">Panduan</a>
+    </div>
+    <div class="nav-avatar">👤</div>
+  </nav>
+
+  <!-- CONTENT -->
+  <div class="page-content wide">
+
+    <!-- Page Header -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+      <div class="section-title" style="margin:0">Contoh Template Pesan – Dosen</div>
+      <a class="btn btn-outline btn-sm" href="page1-beranda.html">← Kembali</a>
+    </div>
+
+    <div class="detail-layout">
+
+      <!-- Sidebar -->
+      <div class="detail-sidebar">
+        <div class="detail-nav-item active" onclick="switchTemplate('izin', this)">Perizinan</div>
+        <div class="detail-nav-item" onclick="switchTemplate('bimbingan', this)">Permohonan Akademik</div>
+        <div class="detail-nav-item" onclick="switchTemplate('konfirmasi', this)">Konfirmasi Informasi</div>
+        <div class="detail-nav-item" onclick="switchTemplate('lainnya', this)">Lainnya</div>
+      </div>
+
+      <!-- Body -->
+      <div class="detail-body">
+        <div class="detail-title" id="template-title">Izin Tidak Masuk Kuliah</div>
+        <div class="template-preview" id="template-preview"></div>
+        <div style="display:flex;justify-content:flex-end;margin-top:16px">
+          <button class="btn btn-primary btn-sm" onclick="copyAndUse()">
+            📋 Salin Template
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="utils.js"></script>
+  <script>
+    const templates = {
+      izin: {
+        title: 'Izin Tidak Masuk Kuliah',
+        body: `Assalamualaikum Wr. Wb.<br><br>
+Perkenalkan, saya <strong>[Nama]</strong>, mahasiswa <strong>[Program Studi]</strong> dengan NIM <strong>[NIM]</strong>.<br><br>
+Saya ingin menyampaikan bahwa saya tidak dapat mengikuti perkuliahan pada <strong>[tanggal]</strong> karena <strong>[alasan]</strong>. Saya mohon maaf atas ketidakhadiran saya.<br><br>
+Terima kasih atas waktu dan perhatian Bapak/Ibu.<br><br>
+Wassalamualaikum Wr. Wb.`
+      },
+      bimbingan: {
+        title: 'Permohonan Bimbingan',
+        body: `Assalamualaikum Wr. Wb.<br><br>
+Perkenalkan, saya <strong>[Nama]</strong>, mahasiswa <strong>[Program Studi]</strong> dengan NIM <strong>[NIM]</strong>.<br><br>
+Saya ingin memohon kesediaan Bapak/Ibu untuk dapat memberikan bimbingan terkait <strong>[topik]</strong> pada <strong>[tanggal/waktu]</strong> yang Bapak/Ibu tentukan.<br><br>
+Terima kasih atas perhatian dan kesediaan Bapak/Ibu.<br><br>
+Wassalamualaikum Wr. Wb.`
+      },
+      konfirmasi: {
+        title: 'Konfirmasi Informasi',
+        body: `Assalamualaikum Wr. Wb.<br><br>
+Perkenalkan, saya <strong>[Nama]</strong>, mahasiswa <strong>[Program Studi]</strong> dengan NIM <strong>[NIM]</strong>.<br><br>
+Saya ingin mengkonfirmasi informasi mengenai <strong>[topik]</strong>. Apakah Bapak/Ibu dapat membantu mengklarifikasi hal tersebut?<br><br>
+Terima kasih atas waktu dan perhatian Bapak/Ibu.<br><br>
+Wassalamualaikum Wr. Wb.`
+      },
+      lainnya: {
+        title: 'Pesan Lainnya',
+        body: `Assalamualaikum Wr. Wb.<br><br>
+Perkenalkan, saya <strong>[Nama]</strong>, mahasiswa <strong>[Program Studi]</strong> dengan NIM <strong>[NIM]</strong>.<br><br>
+Saya ingin menyampaikan <strong>[keperluan/tujuan]</strong>.<br><br>
+Demikian yang dapat saya sampaikan. Terima kasih atas waktu dan perhatian Bapak/Ibu.<br><br>
+Wassalamualaikum Wr. Wb.`
+      }
+    };
+
+    function switchTemplate(key, el) {
+      document.querySelectorAll('.detail-nav-item').forEach(i => i.classList.remove('active'));
+      el.classList.add('active');
+      document.getElementById('template-title').textContent = templates[key].title;
+      document.getElementById('template-preview').innerHTML = templates[key].body;
+    }
+
+    function copyAndUse() {
+      showToast('📋 Template disalin!');
+      setTimeout(() => { window.location.href = 'page2-pilih-penerima.html'; }, 1200);
+    }
+
+    // Initial render
+    document.getElementById('template-preview').innerHTML = templates['izin'].body;
+  </script>
+</body>
+</html>

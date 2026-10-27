@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PesanFormal – Halaman Beranda</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <a class="logo" href="page1-beranda.html">
+      <div class="logo-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24"><path fill="white" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+      </div>
+      <span>Logo<br><small style="font-weight:400;font-size:11px">PesanFormal</small></span>
+    </a>
+    <div class="nav-links">
+      <a class="nav-link active" href="page1-beranda.html">Beranda</a>
+      <a class="nav-link" href="page2-pilih-penerima.html">Buat Pesan</a>
+      <a class="nav-link" href="page6-riwayat.html">Riwayat</a>
+      <a class="nav-link" href="page7-panduan.html">Panduan</a>
+    </div>
+    <div class="nav-avatar">👤</div>
+  </nav>
+
+  <!-- CONTENT -->
+  <div class="page-content">
+
+    <!-- Hero Section -->
+    <div class="hero">
+      <div class="hero-text">
+        <div class="hero-title">Generator Template<br>Pesan Formal</div>
+        <div class="hero-sub">
+          Buat pesan yang sopan, jelas, dan sesuai etika<br>
+          untuk dosen, staf, dan senior.
+        </div>
+        <a class="btn btn-primary" href="page2-pilih-penerima.html">Buat Pesan →</a>
+      </div>
+      <div class="hero-img">
+        <span>[ Ilustrasi Surat ]</span>
+      </div>
+    </div>
+
+    <!-- Template Examples -->
+    <div class="section-title">Contoh Template Pesan</div>
+    <div class="template-grid">
+      <div class="template-card">
+        <div class="t-icon">🎓</div>
+        <div class="t-name">Dosen</div>
+        <div class="t-lines"></div>
+        <div class="t-lines short"></div>
+        <br>
+        <a class="btn btn-outline btn-sm" href="page8-detail-template.html">Lihat Contoh</a>
+      </div>
+      <div class="template-card">
+        <div class="t-icon">🏢</div>
+        <div class="t-name">Staf</div>
+        <div class="t-lines"></div>
+        <div class="t-lines short"></div>
+        <br>
+        <a class="btn btn-outline btn-sm" href="page8-detail-template.html">Lihat Contoh</a>
+      </div>
+      <div class="template-card">
+        <div class="t-icon">👥</div>
+        <div class="t-name">Senior</div>
+        <div class="t-lines"></div>
+        <div class="t-lines short"></div>
+        <br>
+        <a class="btn btn-outline btn-sm" href="page8-detail-template.html">Lihat Contoh</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="utils.js"></script>
+</body>
+</html>

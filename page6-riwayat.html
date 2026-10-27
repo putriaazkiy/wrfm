@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PesanFormal – Riwayat Pesan</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <a class="logo" href="page1-beranda.html">
+      <div class="logo-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24"><path fill="white" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+      </div>
+      <span>Logo<br><small style="font-weight:400;font-size:11px">PesanFormal</small></span>
+    </a>
+    <div class="nav-links">
+      <a class="nav-link" href="page1-beranda.html">Beranda</a>
+      <a class="nav-link" href="page2-pilih-penerima.html">Buat Pesan</a>
+      <a class="nav-link active" href="page6-riwayat.html">Riwayat</a>
+      <a class="nav-link" href="page7-panduan.html">Panduan</a>
+    </div>
+    <div class="nav-avatar">👤</div>
+  </nav>
+
+  <!-- CONTENT -->
+  <div class="page-content wide">
+
+    <!-- Header row -->
+    <div class="table-header">
+      <div class="section-title" style="margin-bottom:0">Riwayat Pesan</div>
+      <div class="search-bar">
+        <span>🔍</span>
+        <input type="text" id="search-input" placeholder="Cari pesan..." oninput="filterTable()" />
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Judul Pesan</th>
+            <th>Penerima</th>
+            <th>Tanggal</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="table-body">
+          <tr>
+            <td>1</td>
+            <td>Izin Tidak Masuk Kuliah</td>
+            <td><span class="badge badge-gray">Dosen</span></td>
+            <td>27 Okt 2026</td>
+            <td>
+              <div class="action-icons">
+                <a class="icon-btn" href="page4-hasil.html" title="Lihat">👁️</a>
+                <div class="icon-btn" title="Salin" onclick="showToast('📋 Pesan disalin!')">📋</div>
+                <div class="icon-btn" title="Hapus" onclick="deleteRow(this)">🗑️</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Permohonan Bimbingan</td>
+            <td><span class="badge badge-gray">Dosen</span></td>
+            <td>25 Okt 2026</td>
+            <td>
+              <div class="action-icons">
+                <a class="icon-btn" href="page4-hasil.html" title="Lihat">👁️</a>
+                <div class="icon-btn" title="Salin" onclick="showToast('📋 Pesan disalin!')">📋</div>
+                <div class="icon-btn" title="Hapus" onclick="deleteRow(this)">🗑️</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Konfirmasi Jadwal</td>
+            <td><span class="badge badge-gray">Staf</span></td>
+            <td>23 Okt 2026</td>
+            <td>
+              <div class="action-icons">
+                <a class="icon-btn" href="page4-hasil.html" title="Lihat">👁️</a>
+                <div class="icon-btn" title="Salin" onclick="showToast('📋 Pesan disalin!')">📋</div>
+                <div class="icon-btn" title="Hapus" onclick="deleteRow(this)">🗑️</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Permintaan Informasi</td>
+            <td><span class="badge badge-gray">Senior</span></td>
+            <td>18 Okt 2026</td>
+            <td>
+              <div class="action-icons">
+                <a class="icon-btn" href="page4-hasil.html" title="Lihat">👁️</a>
+                <div class="icon-btn" title="Salin" onclick="showToast('📋 Pesan disalin!')">📋</div>
+                <div class="icon-btn" title="Hapus" onclick="deleteRow(this)">🗑️</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Surat Domisili</td>
+            <td><span class="badge badge-gray">Staf</span></td>
+            <td>15 Okt 2026</td>
+            <td>
+              <div class="action-icons">
+                <a class="icon-btn" href="page4-hasil.html" title="Lihat">👁️</a>
+                <div class="icon-btn" title="Salin" onclick="showToast('📋 Pesan disalin!')">📋</div>
+                <div class="icon-btn" title="Hapus" onclick="deleteRow(this)">🗑️</div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Delete All -->
+    <div style="display:flex;justify-content:flex-end;margin-top:16px">
+      <button class="btn btn-danger btn-sm" onclick="deleteAll()">
+        🗑️ Hapus Semua Riwayat
+      </button>
+    </div>
+
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="utils.js"></script>
+  <script>
+    function deleteRow(btn) {
+      btn.closest('tr').remove();
+      renumberRows();
+      showToast('🗑️ Riwayat dihapus!');
+    }
+
+    function deleteAll() {
+      document.getElementById('table-body').innerHTML =
+        '<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:32px">Belum ada riwayat pesan.</td></tr>';
+      showToast('🗑️ Semua riwayat dihapus!');
+    }
+
+    function renumberRows() {
+      document.querySelectorAll('#table-body tr td:first-child').forEach((td, i) => {
+        td.textContent = i + 1;
+      });
+    }
+
+    function filterTable() {
+      const q = document.getElementById('search-input').value.toLowerCase();
+      document.querySelectorAll('#table-body tr').forEach(row => {
+        row.style.display = row.textContent.toLowerCase().includes(q) ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>

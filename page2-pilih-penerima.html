@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PesanFormal – Pilih Penerima Pesan</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <a class="logo" href="page1-beranda.html">
+      <div class="logo-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24"><path fill="white" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+      </div>
+      <span>Logo<br><small style="font-weight:400;font-size:11px">PesanFormal</small></span>
+    </a>
+    <div class="nav-links">
+      <a class="nav-link" href="page1-beranda.html">Beranda</a>
+      <a class="nav-link active" href="page2-pilih-penerima.html">Buat Pesan</a>
+      <a class="nav-link" href="page6-riwayat.html">Riwayat</a>
+      <a class="nav-link" href="page7-panduan.html">Panduan</a>
+    </div>
+    <div class="nav-avatar">👤</div>
+  </nav>
+
+  <!-- CONTENT -->
+  <div class="page-content">
+
+    <!-- Stepper -->
+    <div class="stepper">
+      <div class="step current">
+        <div class="step-circle">1</div>
+        <div class="step-label">Pilih Penerima dan Kategori</div>
+      </div>
+      <div class="step-line"></div>
+      <div class="step">
+        <div class="step-circle">2</div>
+        <div class="step-label">Isi Informasi Pesan</div>
+      </div>
+      <div class="step-line"></div>
+      <div class="step">
+        <div class="step-circle">3</div>
+        <div class="step-label">Hasil Pesan</div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- Pilih Penerima -->
+    <div class="section-title">Pilih Penerima Pesan</div>
+    <div class="recipient-grid">
+      <div class="recipient-card selected" onclick="selectRecipient(this)">
+        <div class="r-icon">🎓</div>
+        <div class="r-name">Dosen</div>
+      </div>
+      <div class="recipient-card" onclick="selectRecipient(this)">
+        <div class="r-icon">🏢</div>
+        <div class="r-name">Staf</div>
+        <div class="r-sub">Tenaga Kependidikan</div>
+      </div>
+      <div class="recipient-card" onclick="selectRecipient(this)">
+        <div class="r-icon">👥</div>
+        <div class="r-name">Senior</div>
+      </div>
+      <div class="recipient-card" onclick="selectRecipient(this)">
+        <div class="r-icon">🏛️</div>
+        <div class="r-name">Pengurus Organisasi</div>
+      </div>
+    </div>
+
+    <!-- Pilih Kategori -->
+    <div class="section-title">Pilih Kategori Pesan</div>
+    <div class="form-group">
+      <select class="form-select">
+        <option>Pilih kategori pesan...</option>
+        <option>Izin Tidak Masuk Kuliah</option>
+        <option>Permohonan Bimbingan</option>
+        <option>Konfirmasi Jadwal</option>
+        <option>Permintaan Informasi</option>
+        <option>Surat Domisili</option>
+      </select>
+    </div>
+
+    <!-- Action Bar -->
+    <div class="action-bar">
+      <div></div>
+      <a class="btn btn-primary" href="page3-formulir.html">Selanjutnya →</a>
+    </div>
+
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="utils.js"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PesanFormal – Edit Pesan</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <a class="logo" href="page1-beranda.html">
+      <div class="logo-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24"><path fill="white" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+      </div>
+      <span>Logo<br><small style="font-weight:400;font-size:11px">PesanFormal</small></span>
+    </a>
+    <div class="nav-links">
+      <a class="nav-link" href="page1-beranda.html">Beranda</a>
+      <a class="nav-link active" href="page2-pilih-penerima.html">Buat Pesan</a>
+      <a class="nav-link" href="page6-riwayat.html">Riwayat</a>
+      <a class="nav-link" href="page7-panduan.html">Panduan</a>
+    </div>
+    <div class="nav-avatar">👤</div>
+  </nav>
+
+  <!-- CONTENT -->
+  <div class="page-content">
+
+    <div class="section-title">Edit Pesan</div>
+
+    <textarea id="edit-area" class="edit-area">Assalamualaikum Wr. Wb.
+
+Perkenalkan, saya Aulia Ramadhani, mahasiswa Teknik Komputer Universitas Negeri Makassar dengan NIM 250210500009.
+
+Saya ingin menyampaikan bahwa ………………………………………………………………………………………………………………
+
+Demikian yang dapat saya sampaikan. Terima kasih atas waktu dan perhatiannya.
+
+Wassalamualaikum Wr. Wb.</textarea>
+
+    <!-- Action Bar -->
+    <div class="action-bar">
+      <button class="btn btn-outline" onclick="resetText()">🔄 Reset</button>
+      <button class="btn btn-primary" onclick="saveAndGoBack()">Simpan Perubahan</button>
+    </div>
+
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="utils.js"></script>
+  <script>
+    const originalText = document.getElementById('edit-area').value;
+
+    function resetText() {
+      document.getElementById('edit-area').value = originalText;
+      showToast('🔄 Teks dikembalikan ke semula');
+    }
+
+    function saveAndGoBack() {
+      showToast('✅ Perubahan disimpan!');
+      setTimeout(() => { window.location.href = 'page4-hasil.html'; }, 1200);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PesanFormal – Panduan Etika Komunikasi</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <a class="logo" href="page1-beranda.html">
+      <div class="logo-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24"><path fill="white" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+      </div>
+      <span>Logo<br><small style="font-weight:400;font-size:11px">PesanFormal</small></span>
+    </a>
+    <div class="nav-links">
+      <a class="nav-link" href="page1-beranda.html">Beranda</a>
+      <a class="nav-link" href="page2-pilih-penerima.html">Buat Pesan</a>
+      <a class="nav-link" href="page6-riwayat.html">Riwayat</a>
+      <a class="nav-link active" href="page7-panduan.html">Panduan</a>
+    </div>
+    <div class="nav-avatar">👤</div>
+  </nav>
+
+  <!-- CONTENT -->
+  <div class="page-content wide">
+    <div class="guide-layout">
+
+      <!-- Sidebar -->
+      <div class="guide-sidebar">
+        <div class="guide-nav-item active" onclick="switchSection('umum', this)">📋 Etika Umum</div>
+        <div class="guide-nav-item" onclick="switchSection('dosen', this)">🎓 Menghubungi Dosen</div>
+        <div class="guide-nav-item" onclick="switchSection('staf', this)">🏢 Menghubungi Staf</div>
+        <div class="guide-nav-item" onclick="switchSection('senior', this)">👥 Menghubungi Senior</div>
+        <div class="guide-nav-item" onclick="switchSection('tips', this)">💡 Tips Tambahan</div>
+      </div>
+
+      <!-- Body -->
+      <div class="guide-body">
+        <h2 id="guide-title">Panduan Etika Komunikasi Akademik</h2>
+        <div class="guide-sub" id="guide-sub">
+          Beberapa hal yang perlu diperhatikan dalam menghubungi dosen, staf, dan senior.
+        </div>
+
+        <div style="font-weight:700;font-size:14px;margin-bottom:10px" id="section-title">Etika Umum</div>
+        <ul class="guide-list" id="guide-list">
+          <!-- filled by JS -->
+        </ul>
+
+        <div class="guide-illus">[ Ilustrasi Panduan ]</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="utils.js"></script>
+  <script>
+    const sections = {
+      umum: {
+        title: 'Panduan Etika Komunikasi Akademik',
+        sub: 'Beberapa hal yang perlu diperhatikan dalam menghubungi dosen, staf, dan senior.',
+        section: 'Etika Umum',
+        items: [
+          'Gunakan salam dan sapaan yang sopan sesuai penerima pesan.',
+          'Perkenalkan identitas diri (nama, NIM, dan program studi).',
+          'Sampaikan tujuan atau keperluan dengan jelas dan ringkas.',
+          'Perhatikan waktu mengirim pesan (hindari jam istirahat atau hari libur).',
+          'Periksa kembali pesan sebelum dikirim.',
+        ]
+      },
+      dosen: {
+        title: 'Menghubungi Dosen',
+        sub: 'Panduan khusus etika komunikasi dengan dosen.',
+        section: 'Menghubungi Dosen',
+        items: [
+          'Gunakan gelar akademis yang sesuai (Bapak/Ibu Dosen, Dr., Prof., dll.).',
+          'Sampaikan keperluan secara singkat dan jelas di awal pesan.',
+          'Hindari menghubungi di luar jam kerja kecuali mendesak.',
+          'Tunggu balasan minimal 1×24 jam sebelum mengirim pesan ulang.',
+          'Akhiri pesan dengan ucapan terima kasih yang sopan.',
+        ]
+      },
+      staf: {
+        title: 'Menghubungi Staf',
+        sub: 'Panduan khusus etika komunikasi dengan tenaga kependidikan.',
+        section: 'Menghubungi Staf',
+        items: [
+          'Sebutkan unit/bagian yang dituju agar pesan tepat sasaran.',
+          'Lampirkan dokumen pendukung jika diperlukan.',
+          'Gunakan bahasa yang santun dan tidak terburu-buru.',
+          'Konfirmasi apakah permintaan dapat diproses atau tidak.',
+          'Ucapkan terima kasih atas bantuan yang diberikan.',
+        ]
+      },
+      senior: {
+        title: 'Menghubungi Senior',
+        sub: 'Panduan khusus etika komunikasi dengan senior/kakak tingkat.',
+        section: 'Menghubungi Senior',
+        items: [
+          'Perkenalkan diri terlebih dahulu sebelum bertanya.',
+          'Gunakan sapaan yang menunjukkan rasa hormat (Kak, Mas, Mbak).',
+          'Jangan langsung bertanya tanpa basa-basi yang sopan.',
+          'Hargai waktu senior dengan menyampaikan pertanyaan yang spesifik.',
+          'Ucapkan terima kasih setelah mendapat bantuan.',
+        ]
+      },
+      tips: {
+        title: 'Tips Tambahan',
+        sub: 'Tips umum untuk komunikasi akademik yang efektif.',
+        section: 'Tips Tambahan',
+        items: [
+          'Gunakan fitur Generator Pesan Formal untuk menyusun pesan dengan cepat.',
+          'Simpan template pesan yang sering digunakan di Riwayat Pesan.',
+          'Pilih gaya bahasa yang sesuai konteks (formal, semiformal, atau singkat).',
+          'Review kembali pesan hasil generator sebelum dikirim.',
+          'Manfaatkan fitur Edit Pesan untuk menyesuaikan isi pesan.',
+        ]
+      }
+    };
+
+    function renderSection(key) {
+      const s = sections[key];
+      document.getElementById('guide-title').textContent = s.title;
+      document.getElementById('guide-sub').textContent = s.sub;
+      document.getElementById('section-title').textContent = s.section;
+      const list = document.getElementById('guide-list');
+      list.innerHTML = s.items.map((item, i) => `
+        <li>
+          <div class="guide-num">${i + 1}</div>
+          <div>${item}</div>
+        </li>`).join('');
+    }
+
+    function switchSection(key, el) {
+      document.querySelectorAll('.guide-nav-item').forEach(i => i.classList.remove('active'));
+      el.classList.add('active');
+      renderSection(key);
+    }
+
+    // Initial render
+    renderSection('umum');
+  </script>
+</body>
+</html>
